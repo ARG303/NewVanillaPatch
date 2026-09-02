@@ -1,1 +1,63 @@
+name: Update patch manifest
 
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'runtime/xinput1_3.dll'
+      - 'runtime/fps_patch.ini'
+      - 'PATCH_VERSION'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate manifest
+        shell: python
+        run: |
+          import hashlib, json, pathlib
+
+          root = pathlib.Path('.')
+          version = (root / 'PATCH_VERSION').read_text(encoding='utf-8').strip()
+          files = []
+          for name in ('xinput1_3.dll', 'fps_patch.ini'):
+              p = root / 'runtime' / name
+              digest = hashlib.sha256(p.read_bytes()).hexdigest()
+              files.append({
+                  'name': name,
+                  'url': f'https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/{name}',
+                  'sha256': digest,
+              })
+
+          manifest = {
+              'patchVersion': version,
+              'gameVersion': '1.12.3444.25830',
+              'targetFps': 60,
+              'files': files,
+          }
+          (root / 'manifest.json').write_text(
+              json.dumps(manifest, indent=2) + '\n',
+              encoding='utf-8'
+          )
+
+      - name: Commit generated manifest
+        shell: bash
+        run: |
+          if git diff --quiet -- manifest.json; then
+            echo "manifest.json is already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git commit -m "Update FPS patch manifest"
+          git push

@@ -1,0 +1,39 @@
+name: Publish patch release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Patch version, e.g. 7.0.1'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate version
+        shell: bash
+        run: |
+          test "$(tr -d '\r\n ' < PATCH_VERSION)" = "${{ inputs.version }}" || {
+            echo "PATCH_VERSION does not match requested release version"
+            exit 1
+          }
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          TAG="patch-v${{ inputs.version }}"
+          gh release create "$TAG" \
+            runtime/xinput1_3.dll \
+            runtime/fps_patch.ini \
+            manifest.json \
+            --title "RA3 60 FPS Patch ${{ inputs.version }}" \
+            --generate-notes
