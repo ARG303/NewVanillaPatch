@@ -1,19 +1,6 @@
-NewVanilla / Launcher 0.6.0
+Replace in ARG303/NewVanillaPatch:
+LAUNCHER_VERSION
+manifest.json
+launcher/RA3FPSLauncher.exe
 
-Upload/replace in ARG303/NewVanillaPatch:
-  LAUNCHER_VERSION
-  MOD_VERSION
-  manifest.json
-  launcher/RA3FPSLauncher.exe
-  mod/NewVanilla.zip
-  .github/workflows/update-manifest.yml
-
-After upload, the old launcher 0.5.1 can update itself to 0.6.0.
-After 0.6.0 restarts it will download/install NewVanilla 1.00 and launch RA3 using:
-  NewVanilla/NewVanilla_1.00.skudef
-
-For future mod updates:
-  1. Replace mod/NewVanilla.zip
-  2. Change MOD_VERSION (example 1.00 -> 1.01)
-  3. Commit
-GitHub Actions recalculates SHA-256 and reads the .skudef filename from the ZIP automatically.
+Keep MOD_VERSION and mod/NewVanilla.zip unchanged.
