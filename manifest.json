@@ -1,0 +1,17 @@
+{
+  "patchVersion": "7.0.0",
+  "gameVersion": "1.12.3444.25830",
+  "targetFps": 60,
+  "files": [
+    {
+      "name": "xinput1_3.dll",
+      "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll",
+      "sha256": "781b9ec9cc24b6fd495747dd8434073e8abe60784aeb9fbfc4641b47af1560ff"
+    },
+    {
+      "name": "fps_patch.ini",
+      "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini",
+      "sha256": "7d0d0ec6cd90d8d1a45f00c1253b0e49b5c0eb80a2c5f5ac7dc30ff6a9194dea"
+    }
+  ]
+}
