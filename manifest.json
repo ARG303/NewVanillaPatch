@@ -22,8 +22,8 @@
     "skuDef": "NewVanilla_1.00.skudef"
   },
   "launcher": {
-    "version": "0.7.2",
+    "version": "0.7.3",
     "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-    "sha256": "f9a47e69e909cae77b35d28c255afd0add53762ff84b2e7b1d61d29646d0df31"
+    "sha256": "4f9761f8bda08e44f9e3c769791928f6fcd3f930711d6ccecb8e8457b258748c"
   }
 }
