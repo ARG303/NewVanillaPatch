@@ -1,1 +1,29 @@
-Replace LAUNCHER_VERSION, manifest.json and launcher/RA3FPSLauncher.exe in ARG303/NewVanillaPatch.
+NewVanilla Patch v0.8.0 - installer release
+============================================
+
+Repository files to replace/add:
+
+1. LAUNCHER_VERSION
+2. manifest.json
+3. launcher/RA3FPSLauncher.exe
+4. installer/NewVanillaPatch_Setup.exe
+
+Recommended public download:
+  NewVanillaPatch_Setup.exe
+
+Launcher SHA-256:
+  81efd0aa0df92d024846968b4fb41c5e215621c2ed598a03580acf6936dc06e9
+
+Setup SHA-256:
+  e49ec0fb0e725c3481622eeed4f2bd11e82d6cd06127817d7870be33e9039c05
+
+For GitHub Releases, upload installer/NewVanillaPatch_Setup.exe and name the
+release asset exactly:
+  NewVanillaPatch_Setup.exe
+
+The installer:
+- installs for the current user (no admin elevation);
+- installs to %%LOCALAPPDATA%%\Programs\NewVanillaPatch;
+- creates Start Menu and Desktop shortcuts;
+- registers an uninstaller in Windows Installed Apps;
+- does not modify Red Alert 3 during installation.
