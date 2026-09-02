@@ -14,9 +14,16 @@
       "sha256": "6b02e5da7af03490a28a76ef11e754a4a65f0dc0ce651ce1bdca23cb4fa7a360"
     }
   ],
+  "mod": {
+    "version": "1.00",
+    "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/mod/NewVanilla.zip",
+    "sha256": "9a653cd423f66aa15adbe7c0bacd60a7d2736ca2ba554e9b11cec8739a8d32e5",
+    "folder": "NewVanilla",
+    "skuDef": "NewVanilla_1.00.skudef"
+  },
   "launcher": {
-    "version": "0.4.0",
+    "version": "0.6.0",
     "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-    "sha256": "8c600f4d933a2539534c6747cb58914e63b816e1fd9d3a1ca02a7ab1a8181ea5"
+    "sha256": "b7e558ba0058d40aec84a9b82d93023df64db5e7e4dfce9aa24301fc9427db7e"
   }
 }
