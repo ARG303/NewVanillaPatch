@@ -1,4 +1,4 @@
-NewVanilla Patch v0.8.1
+NewVanilla Patch v0.8.2
 
 Replace in the GitHub repository:
   LAUNCHER_VERSION
@@ -8,4 +8,7 @@ Replace in the GitHub repository:
 
 Recommended public download: publish installer/NewVanillaPatch_Setup.exe as a GitHub Release asset named NewVanillaPatch_Setup.exe.
 
-v0.8.1 fix: the launcher no longer asks for NewVanilla.game. 60 FPS compatibility is derived only from the user-installed Data\ra3_1.12.game.
+v0.8.2 compatibility update:
+  - adds RA3 1.12 build SHA-256 ec230c6ae1eaee30b0b4fa6ba29d417c974ecae46d6715dfbe786a815935c165
+  - at 60 FPS launch it is normalized locally to the already supported 40023c... build, then converted to the exact FPS Patch v7 compatible 29aa6b... build
+  - the user's original Data\ra3_1.12.game is never permanently modified; the launcher restores it after the game exits
