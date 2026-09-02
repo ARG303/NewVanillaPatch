@@ -15,7 +15,7 @@
     }
   ],
   "mod": {
-    "version": "1.00",
+    "version": "1.01",
     "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/mod/NewVanilla.zip",
     "sha256": "9a653cd423f66aa15adbe7c0bacd60a7d2736ca2ba554e9b11cec8739a8d32e5",
     "folder": "NewVanilla",
