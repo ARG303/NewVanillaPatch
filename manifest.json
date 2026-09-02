@@ -13,10 +13,5 @@
       "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini",
       "sha256": "6b02e5da7af03490a28a76ef11e754a4a65f0dc0ce651ce1bdca23cb4fa7a360"
     }
-  ],
-  "launcher": {
-    "version": "0.3.0",
-    "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-    "sha256": "5648b5cdaf49539f33b7fc0f888eedd50c8bfc5b8b55303772a9cee121ee2fb8"
-  }
+  ]
 }
