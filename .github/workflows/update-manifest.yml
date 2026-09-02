@@ -31,48 +31,52 @@ jobs:
 
       - name: Sync repository
         shell: bash
-        run: |
-          git pull --rebase origin main
+        run: git pull --rebase origin main
 
       - name: Generate manifest
-        shell: bash
+        shell: python
         run: |
-          PATCH_VERSION="$(tr -d '\r\n ' < PATCH_VERSION)"
-          LAUNCHER_VERSION="$(tr -d '\r\n ' < LAUNCHER_VERSION)"
+          import hashlib, json, pathlib
 
-          PATCH_DLL_SHA="$(sha256sum runtime/xinput1_3.dll | awk '{print $1}')"
-          PATCH_INI_SHA="$(sha256sum runtime/fps_patch.ini | awk '{print $1}')"
-          LAUNCHER_SHA="$(sha256sum launcher/RA3FPSLauncher.exe | awk '{print $1}')"
+          root = pathlib.Path('.')
+          patch_version = (root / 'PATCH_VERSION').read_text(encoding='utf-8').strip()
+          launcher_version = (root / 'LAUNCHER_VERSION').read_text(encoding='utf-8').strip()
 
-          cat > manifest.json <<EOF
-          {
-            "patchVersion": "${PATCH_VERSION}",
-            "gameVersion": "1.12.3444.25830",
-            "targetFps": 60,
-            "files": {
-              "xinput1_3.dll": {
-                "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll",
-                "sha256": "${PATCH_DLL_SHA}"
+          def sha256(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          files = []
+          for name in ('xinput1_3.dll', 'fps_patch.ini'):
+              p = root / 'runtime' / name
+              files.append({
+                  'name': name,
+                  'url': f'https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/{name}',
+                  'sha256': sha256(p),
+              })
+
+          launcher_path = root / 'launcher' / 'RA3FPSLauncher.exe'
+          manifest = {
+              'patchVersion': patch_version,
+              'gameVersion': '1.12.3444.25830',
+              'targetFps': 60,
+              'files': files,
+              'launcher': {
+                  'version': launcher_version,
+                  'url': 'https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe',
+                  'sha256': sha256(launcher_path),
               },
-              "fps_patch.ini": {
-                "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini",
-                "sha256": "${PATCH_INI_SHA}"
-              }
-            },
-            "launcher": {
-              "version": "${LAUNCHER_VERSION}",
-              "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-              "sha256": "${LAUNCHER_SHA}"
-            }
           }
-          EOF
+
+          (root / 'manifest.json').write_text(
+              json.dumps(manifest, indent=2) + '\n',
+              encoding='utf-8'
+          )
 
       - name: Commit manifest
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add manifest.json
 
           if git diff --cached --quiet; then
@@ -86,7 +90,6 @@ jobs:
             if git push origin HEAD:main; then
               exit 0
             fi
-
             echo "Push conflict, retry $attempt/3..."
             git pull --rebase origin main
             sleep 2

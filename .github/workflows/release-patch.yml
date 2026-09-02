@@ -1,11 +1,7 @@
-name: Publish patch release
+name: Publish current bundle
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Patch version, e.g. 7.0.1'
-        required: true
 
 permissions:
   contents: write
@@ -17,23 +13,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate version
-        shell: bash
-        run: |
-          test "$(tr -d '\r\n ' < PATCH_VERSION)" = "${{ inputs.version }}" || {
-            echo "PATCH_VERSION does not match requested release version"
-            exit 1
-          }
-
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          TAG="patch-v${{ inputs.version }}"
+          PATCH_VERSION="$(tr -d '\r\n ' < PATCH_VERSION)"
+          LAUNCHER_VERSION="$(tr -d '\r\n ' < LAUNCHER_VERSION)"
+          TAG="bundle-p${PATCH_VERSION}-l${LAUNCHER_VERSION}"
           gh release create "$TAG" \
             runtime/xinput1_3.dll \
             runtime/fps_patch.ini \
+            launcher/RA3FPSLauncher.exe \
             manifest.json \
-            --title "RA3 60 FPS Patch ${{ inputs.version }}" \
+            --title "RA3 60 FPS Patch ${PATCH_VERSION} / Launcher ${LAUNCHER_VERSION}" \
             --generate-notes
