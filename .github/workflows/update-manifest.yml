@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-manifest
+  cancel-in-progress: false
+
 jobs:
   update-manifest:
     runs-on: ubuntu-latest
@@ -22,6 +26,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync repository
+        shell: bash
+        run: |
+          git pull --rebase origin main
 
       - name: Generate manifest
         shell: bash
@@ -70,4 +81,16 @@ jobs:
           fi
 
           git commit -m "Update manifest"
-          git push
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push conflict, retry $attempt/3..."
+            git pull --rebase origin main
+            sleep 2
+          done
+
+          echo "Failed to push manifest after 3 attempts."
+          exit 1
