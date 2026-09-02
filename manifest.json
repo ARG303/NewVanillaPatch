@@ -1,5 +1,5 @@
 {
-  "patchVersion": "7.0.0",
+  "patchVersion": "7.0.1",
   "gameVersion": "1.12.3444.25830",
   "targetFps": 60,
   "files": [
@@ -11,7 +11,12 @@
     {
       "name": "fps_patch.ini",
       "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini",
-      "sha256": "7d0d0ec6cd90d8d1a45f00c1253b0e49b5c0eb80a2c5f5ac7dc30ff6a9194dea"
+      "sha256": "6b02e5da7af03490a28a76ef11e754a4a65f0dc0ce651ce1bdca23cb4fa7a360"
     }
-  ]
+  ],
+  "launcher": {
+    "version": "0.3.0",
+    "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
+    "sha256": "5648b5cdaf49539f33b7fc0f888eedd50c8bfc5b8b55303772a9cee121ee2fb8"
+  }
 }

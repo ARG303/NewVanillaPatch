@@ -1,26 +1,50 @@
-# Red Alert 3 — 60 FPS Patch
+# NewVanillaPatch
 
-Runtime repository for the Red Alert 3 60 FPS launcher.
+Runtime files and auto-update metadata for the Red Alert 3 60 FPS launcher.
 
-## Runtime files
+## Current versions
 
-- `runtime/xinput1_3.dll` — XInput proxy that installs the FPS patch when RA3 1.12 starts.
-- `runtime/fps_patch.ini` — patch configuration file.
-- `manifest.json` — machine-readable update manifest consumed by the launcher.
-- `PATCH_VERSION` — current patch version.
+- FPS patch package: **7.0.1**
+- Launcher: **0.3.0**
+- Target game: **Red Alert 3 1.12**
+- Target FPS: **60**
 
-## Updating the patch
+## Repository layout
+
+```text
+manifest.json
+PATCH_VERSION
+LAUNCHER_VERSION
+runtime/
+  xinput1_3.dll
+  fps_patch.ini
+launcher/
+  RA3FPSLauncher.exe
+.github/workflows/
+  update-manifest.yml
+  release-patch.yml
+```
+
+`manifest.json` is read by the launcher at:
+
+```text
+https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/manifest.json
+```
+
+The launcher downloads runtime files and its own update only after SHA-256 verification.
+
+## Updating the FPS patch
 
 1. Replace `runtime/xinput1_3.dll` and/or `runtime/fps_patch.ini`.
-2. Increase the version in `PATCH_VERSION`.
-3. Commit and push to `main`.
-4. GitHub Actions recalculates SHA-256 hashes and updates `manifest.json` automatically.
-5. Launchers will see the new manifest on the next update check and download only changed runtime files.
+2. Change `PATCH_VERSION`.
+3. Commit and push.
+4. `Update manifests` recalculates hashes and updates `manifest.json`.
 
-## Launcher manifest URL
+## Updating the launcher
 
-`https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/manifest.json`
+1. Replace `launcher/RA3FPSLauncher.exe`.
+2. Change `LAUNCHER_VERSION`.
+3. Commit and push.
+4. The workflow recalculates the launcher SHA-256 in `manifest.json`.
 
-## Optional GitHub Release
-
-Open **Actions → Publish patch release → Run workflow**, enter the same version as `PATCH_VERSION`, and GitHub will create a release containing the DLL, INI, and manifest.
+Launcher **0.2.7+** can download a newer launcher, verify SHA-256, close itself, replace its own executable, and restart.
