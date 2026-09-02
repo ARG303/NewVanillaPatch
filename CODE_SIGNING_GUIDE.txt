@@ -1,0 +1,13 @@
+Windows SmartScreen/Defender note
+
+The launcher is now built without PowerShell or generated update scripts, but an unsigned EXE can still show SmartScreen warnings.
+For reliable publisher identity, sign every release with the same trusted Authenticode code-signing certificate. A self-signed certificate does not provide SmartScreen trust.
+
+Recommended release order:
+1. Build RA3FPSLauncher.exe.
+2. Authenticode-sign RA3FPSLauncher.exe with a trusted code-signing certificate and timestamp it.
+3. Calculate SHA-256 AFTER signing.
+4. Put that signed EXE in launcher/RA3FPSLauncher.exe.
+5. Put the post-signing SHA-256 in manifest.json.
+
+Do not modify the EXE after signing.
