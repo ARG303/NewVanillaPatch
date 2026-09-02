@@ -1,1 +1,1 @@
-Replace LAUNCHER_VERSION, manifest.json, and launcher/RA3FPSLauncher.exe in ARG303/NewVanillaPatch. Do NOT upload ra3_1.12.game. Users import their own compatible local copy through the launcher.
+Replace LAUNCHER_VERSION, manifest.json and launcher/RA3FPSLauncher.exe in ARG303/NewVanillaPatch.
