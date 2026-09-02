@@ -1,4 +1,7 @@
-Replace in ARG303/NewVanillaPatch:
-- LAUNCHER_VERSION
-- manifest.json
-- launcher/RA3FPSLauncher.exe
+Upload/replace these files in ARG303/NewVanillaPatch:
+
+LAUNCHER_VERSION
+manifest.json
+launcher/RA3FPSLauncher.exe
+
+Runtime and mod files do not change in v0.6.7.
