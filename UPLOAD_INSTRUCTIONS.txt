@@ -1,20 +1,15 @@
-NewVanilla Patch v0.8.6 — game-path/mod-download hotfix
+NewVanilla Patch v0.8.7 runtime-sync hotfix
 
-Upload/replace ONLY these three repository files:
+Replace only:
   LAUNCHER_VERSION
   launcher/RA3FPSLauncher.exe
   installer/NewVanillaPatch_Setup.exe
 
-Do NOT replace manifest.json, MOD_VERSION, mod/NewVanilla.zip, runtime or compatibility files with files from an older package.
-The existing GitHub Action will run because these paths changed and will rebuild manifest.json using the CURRENT MOD_VERSION and CURRENT mod/NewVanilla.zip already in the repository.
+Do NOT replace MOD_VERSION, mod/NewVanilla.zip or your current manifest mod section.
+If your GitHub workflow regenerates manifest.json, keep launcher.version at 0.8.7 and update the launcher SHA-256 to:
+781841b4d64f02f8626335c7488433d0c5dbe178a60f107720f374eb72904bd8
 
-v0.8.6 fixes:
-- A valid RA3 folder visible in the path field is synchronized to settings.json before Check for updates starts.
-- NewVanilla download uses the verified path shown in the UI instead of a stale saved GameRoot.
-- Older settings are repaired automatically when the visible path is valid.
-- UI now shows Downloading / Verifying / Installing stages for NewVanilla.
-
-Launcher SHA-256:
-9733c596e458a0e4ed0cf5484b6528ccff6806bdc642eb9b6319d631477d9281
-Installer SHA-256:
-41711ac8d9831db32bfca86b259cb585593be01a21668c1bfca51052fb9ca9be
+Fix:
+- exact runtime SHA-256 now determines readiness;
+- missing optional compatibility entries no longer leave a valid FPS runtime stuck at "waiting for GitHub sync";
+- Check for updates re-downloads xinput1_3.dll/fps_patch.ini only when missing or invalid.
