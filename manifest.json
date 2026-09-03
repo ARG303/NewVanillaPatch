@@ -15,11 +15,11 @@
     }
   ],
   "mod": {
-    "version": "1.01",
+    "version": "1.02",
     "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/mod/NewVanilla.zip",
-    "sha256": "d4607e01379af53165154a33499ceeb3b5dd82ccdf8fd698bf2be2faed09cb58",
+    "sha256": "a3f87a1090ea8893018e7881a646cf65514236566c36f1a5f0705b74b0426b4d",
     "folder": "NewVanilla",
-    "skuDef": "NewVanilla_1.01.skudef"
+    "skuDef": "NewVanilla_1.02.skudef"
   },
   "launcher": {
     "version": "0.8.2",
