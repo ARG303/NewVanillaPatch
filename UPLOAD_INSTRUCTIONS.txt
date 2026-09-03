@@ -1,22 +1,16 @@
-NewVanilla Patch v0.8.8 — GitHub launcher hash hotfix
+NewVanilla Patch v0.8.9 compatibility support hotfix
 
-WHY THE SCREENSHOT ERROR HAPPENS
-The manifest says one SHA-256 for launcher/RA3FPSLauncher.exe, but GitHub is serving a different EXE. Older launchers refuse the update correctly because the SHA-256 does not match.
-
-UPLOAD THESE 4 FILES TO THE SAME PATHS IN ONE COMMIT:
+Upload these paths to the ROOT of the existing GitHub repository in ONE commit:
   LAUNCHER_VERSION
   launcher/RA3FPSLauncher.exe
   installer/NewVanillaPatch_Setup.exe
+  compatibility/ra3_40023_to_29aa.r3dp
+  compatibility/ra3_ec230_to_40023.r3np
   .github/workflows/update-manifest.yml
 
-IMPORTANT
-- Do NOT manually type the launcher SHA into manifest.json.
-- Do NOT replace MOD_VERSION or mod/NewVanilla.zip.
-- Let the Update manifest GitHub Action rebuild manifest.json from the exact committed EXE.
-- Wait until the GitHub Action finishes successfully before testing an old launcher.
+DO NOT replace MOD_VERSION or mod/NewVanilla.zip. Keep the current NewVanilla mod version.
 
-Expected v0.8.8 launcher SHA-256:
-0bd2f50060bf11d73dad582b6afe24c013f8090df98f9ed52532f3a8212e8ecd
+After push, wait for Actions -> Update manifest to finish successfully.
+The workflow will rebuild manifest.json from the actual repository files and include both compatibility support files.
 
-Expected v0.8.8 installer SHA-256:
-2a8ea1a25f1693101b796d9ed9ffcaa4aacae335d5950e0873fa81f2c6d35007
+v0.8.9 also installs the compatibility .r3dp/.r3np files locally, so users who install v0.8.9 do not depend on the first GitHub support-file download for these known RA3 builds.
