@@ -1,15 +1,22 @@
-NewVanilla Patch v0.8.7 runtime-sync hotfix
+NewVanilla Patch v0.8.8 — GitHub launcher hash hotfix
 
-Replace only:
+WHY THE SCREENSHOT ERROR HAPPENS
+The manifest says one SHA-256 for launcher/RA3FPSLauncher.exe, but GitHub is serving a different EXE. Older launchers refuse the update correctly because the SHA-256 does not match.
+
+UPLOAD THESE 4 FILES TO THE SAME PATHS IN ONE COMMIT:
   LAUNCHER_VERSION
   launcher/RA3FPSLauncher.exe
   installer/NewVanillaPatch_Setup.exe
+  .github/workflows/update-manifest.yml
 
-Do NOT replace MOD_VERSION, mod/NewVanilla.zip or your current manifest mod section.
-If your GitHub workflow regenerates manifest.json, keep launcher.version at 0.8.7 and update the launcher SHA-256 to:
-781841b4d64f02f8626335c7488433d0c5dbe178a60f107720f374eb72904bd8
+IMPORTANT
+- Do NOT manually type the launcher SHA into manifest.json.
+- Do NOT replace MOD_VERSION or mod/NewVanilla.zip.
+- Let the Update manifest GitHub Action rebuild manifest.json from the exact committed EXE.
+- Wait until the GitHub Action finishes successfully before testing an old launcher.
 
-Fix:
-- exact runtime SHA-256 now determines readiness;
-- missing optional compatibility entries no longer leave a valid FPS runtime stuck at "waiting for GitHub sync";
-- Check for updates re-downloads xinput1_3.dll/fps_patch.ini only when missing or invalid.
+Expected v0.8.8 launcher SHA-256:
+0bd2f50060bf11d73dad582b6afe24c013f8090df98f9ed52532f3a8212e8ecd
+
+Expected v0.8.8 installer SHA-256:
+2a8ea1a25f1693101b796d9ed9ffcaa4aacae335d5950e0873fa81f2c6d35007

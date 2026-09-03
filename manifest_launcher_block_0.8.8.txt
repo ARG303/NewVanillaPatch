@@ -1,0 +1,9 @@
+Fallback only if GitHub Actions is unavailable. Replace ONLY the launcher object in manifest.json:
+
+"launcher": {
+  "version": "0.8.8",
+  "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
+  "sha256": "0bd2f50060bf11d73dad582b6afe24c013f8090df98f9ed52532f3a8212e8ecd"
+}
+
+Do not alter the mod section or runtime hashes when doing this.
