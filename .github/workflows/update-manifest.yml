@@ -3,16 +3,16 @@ name: Update manifest
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
-      - "PATCH_VERSION"
-      - "LAUNCHER_VERSION"
-      - "MOD_VERSION"
-      - "runtime/**"
-      - "launcher/**"
-      - "mod/**"
-      - ".github/workflows/update-manifest.yml"
+      - 'LAUNCHER_VERSION'
+      - 'MOD_VERSION'
+      - 'runtime/**'
+      - 'compatibility/**'
+      - 'launcher/**'
+      - 'installer/**'
+      - 'mod/**'
+      - '.github/workflows/update-manifest.yml'
 
 permissions:
   contents: write
@@ -22,90 +22,84 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update-manifest:
+  update:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Sync repository
-        shell: bash
-        run: git pull --rebase origin main
-
-      - name: Generate manifest
+      - name: Rebuild manifest
         shell: bash
         run: |
-          PATCH_VERSION="$(tr -d '\r\n ' < PATCH_VERSION)"
-          LAUNCHER_VERSION="$(tr -d '\r\n ' < LAUNCHER_VERSION)"
-          MOD_VERSION="$(tr -d '\r\n ' < MOD_VERSION)"
+          set -euo pipefail
+          VERSION="$(tr -d '\r\n ' < LAUNCHER_VERSION)"
+          MOD_VERSION="1.00"
+          if [ -f MOD_VERSION ]; then MOD_VERSION="$(tr -d '\r\n ' < MOD_VERSION)"; fi
 
-          PATCH_DLL_SHA="$(sha256sum runtime/xinput1_3.dll | awk '{print $1}')"
-          PATCH_INI_SHA="$(sha256sum runtime/fps_patch.ini | awk '{print $1}')"
+          XINPUT_SHA="$(sha256sum runtime/xinput1_3.dll | awk '{print $1}')"
+          INI_SHA="$(sha256sum runtime/fps_patch.ini | awk '{print $1}')"
+          DELTA_SHA="$(sha256sum compatibility/ra3_40023_to_29aa.r3dp | awk '{print $1}')"
+          NORMALIZE_SHA="$(sha256sum compatibility/ra3_ec230_to_40023.r3np | awk '{print $1}')"
           LAUNCHER_SHA="$(sha256sum launcher/RA3FPSLauncher.exe | awk '{print $1}')"
+          INSTALLER_SHA="$(sha256sum installer/NewVanillaPatch_Setup.exe | awk '{print $1}')"
           MOD_SHA="$(sha256sum mod/NewVanilla.zip | awk '{print $1}')"
-          MOD_SKU="$(unzip -Z1 mod/NewVanilla.zip | awk -F/ 'tolower($NF) ~ /\.skudef$/ {print $NF; exit}')"
+          SKU="$(unzip -Z1 mod/NewVanilla.zip | grep -Ei '\.skudef$' | head -n 1 | xargs basename)"
 
-          if [ -z "$MOD_SKU" ]; then
-            echo "No .skudef found in mod/NewVanilla.zip"
-            exit 1
-          fi
-
-          cat > manifest.json <<EOF2
+          cat > manifest.json <<JSON
           {
-            "patchVersion": "${PATCH_VERSION}",
+            "patchVersion": "7.0.1",
             "gameVersion": "1.12.3444.25830",
             "targetFps": 60,
             "files": [
-              {
-                "name": "xinput1_3.dll",
-                "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll",
-                "sha256": "${PATCH_DLL_SHA}"
-              },
-              {
-                "name": "fps_patch.ini",
-                "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini",
-                "sha256": "${PATCH_INI_SHA}"
-              }
+              {"name":"xinput1_3.dll","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll","sha256":"${XINPUT_SHA}"},
+              {"name":"fps_patch.ini","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini","sha256":"${INI_SHA}"},
+              {"name":"ra3_40023_to_29aa.r3dp","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/compatibility/ra3_40023_to_29aa.r3dp","sha256":"${DELTA_SHA}"},
+              {"name":"ra3_ec230_to_40023.r3np","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/compatibility/ra3_ec230_to_40023.r3np","sha256":"${NORMALIZE_SHA}"}
             ],
             "mod": {
               "version": "${MOD_VERSION}",
               "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/mod/NewVanilla.zip",
               "sha256": "${MOD_SHA}",
               "folder": "NewVanilla",
-              "skuDef": "${MOD_SKU}"
+              "skuDef": "${SKU}"
             },
             "launcher": {
-              "version": "${LAUNCHER_VERSION}",
+              "version": "${VERSION}",
               "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
               "sha256": "${LAUNCHER_SHA}"
+            },
+            "installer": {
+              "version": "${VERSION}",
+              "url": "https://github.com/ARG303/NewVanillaPatch/releases/latest/download/NewVanillaPatch_Setup.exe",
+              "sha256": "${INSTALLER_SHA}"
             }
           }
-          EOF2
+          JSON
+
+      - name: Verify generated manifest against committed binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECTED_LAUNCHER="$(sha256sum launcher/RA3FPSLauncher.exe | awk '{print $1}')"
+          EXPECTED_INSTALLER="$(sha256sum installer/NewVanillaPatch_Setup.exe | awk '{print $1}')"
+          ACTUAL_LAUNCHER="$(python3 -c 'import json; print(json.load(open("manifest.json"))["launcher"]["sha256"])')"
+          ACTUAL_INSTALLER="$(python3 -c 'import json; print(json.load(open("manifest.json"))["installer"]["sha256"])')"
+          test "$EXPECTED_LAUNCHER" = "$ACTUAL_LAUNCHER"
+          test "$EXPECTED_INSTALLER" = "$ACTUAL_INSTALLER"
 
       - name: Commit manifest
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add manifest.json
-          if git diff --cached --quiet; then
-            echo "manifest.json is already up to date"
-            exit 0
-          fi
-
+          if git diff --cached --quiet; then exit 0; fi
           git commit -m "Update manifest"
-
-          for attempt in 1 2 3; do
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            echo "Push conflict, retry $attempt/3..."
-            git pull --rebase origin main
-            sleep 2
+          for i in 1 2 3; do
+            git pull --rebase origin main || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 2))
           done
-
           exit 1
