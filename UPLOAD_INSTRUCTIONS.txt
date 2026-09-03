@@ -1,16 +1,18 @@
-NewVanilla Patch v0.8.9 compatibility support hotfix
+NewVanilla Patch v0.8.10 — RA3BattleNet SkuDef compatibility hotfix
 
-Upload these paths to the ROOT of the existing GitHub repository in ONE commit:
+Upload these paths to the repository in ONE commit:
   LAUNCHER_VERSION
   launcher/RA3FPSLauncher.exe
   installer/NewVanillaPatch_Setup.exe
+  .github/workflows/update-manifest.yml
   compatibility/ra3_40023_to_29aa.r3dp
   compatibility/ra3_ec230_to_40023.r3np
-  .github/workflows/update-manifest.yml
 
-DO NOT replace MOD_VERSION or mod/NewVanilla.zip. Keep the current NewVanilla mod version.
+Do NOT replace MOD_VERSION or mod/NewVanilla.zip.
+Wait for Actions -> Update manifest to complete successfully.
 
-After push, wait for Actions -> Update manifest to finish successfully.
-The workflow will rebuild manifest.json from the actual repository files and include both compatibility support files.
-
-v0.8.9 also installs the compatibility .r3dp/.r3np files locally, so users who install v0.8.9 do not depend on the first GitHub support-file download for these known RA3 builds.
+Important v0.8.10 change:
+  - no RA3FPSLauncher.clean.cfg is created or passed to RA3;
+  - -config points to the original RA3_*_1.12.SkuDef filename/path;
+  - if a CommunityPatch add-config line exists, the original SkuDef is backed up,
+    temporarily sanitized in place, and restored after RA3 exits/recovery.
