@@ -1,4 +1,4 @@
-NewVanilla Patch v0.8.10 — RA3BattleNet SkuDef compatibility hotfix
+NewVanilla Patch v0.8.11 — vanilla 30/60 FPS + 1.12.8 SkuDef support
 
 Upload these paths to the repository in ONE commit:
   LAUNCHER_VERSION
@@ -11,8 +11,8 @@ Upload these paths to the repository in ONE commit:
 Do NOT replace MOD_VERSION or mod/NewVanilla.zip.
 Wait for Actions -> Update manifest to complete successfully.
 
-Important v0.8.10 change:
-  - no RA3FPSLauncher.clean.cfg is created or passed to RA3;
-  - -config points to the original RA3_*_1.12.SkuDef filename/path;
-  - if a CommunityPatch add-config line exists, the original SkuDef is backed up,
-    temporarily sanitized in place, and restored after RA3 exits/recovery.
+Important v0.8.11 behavior:
+  - PLAY WITH 60 FPS launches VANILLA RA3 + FPS Patch v7 (no -modConfig / no NewVanilla).
+  - PLAY VANILLA • 30 FPS launches VANILLA RA3 and temporarily disables a local FPS proxy.
+  - The real installed SkuDef path is preserved for RA3BattleNet.
+  - Supported config names include RA3_*_1.12.SkuDef and RA3_*_1.12.8.SkuDef (plus 1.12* variants).
