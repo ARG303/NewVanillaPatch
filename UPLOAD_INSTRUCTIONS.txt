@@ -1,14 +1,20 @@
-NewVanilla Patch v0.8.2
+NewVanilla Patch v0.8.6 — game-path/mod-download hotfix
 
-Replace in the GitHub repository:
+Upload/replace ONLY these three repository files:
   LAUNCHER_VERSION
-  manifest.json
   launcher/RA3FPSLauncher.exe
   installer/NewVanillaPatch_Setup.exe
 
-Recommended public download: publish installer/NewVanillaPatch_Setup.exe as a GitHub Release asset named NewVanillaPatch_Setup.exe.
+Do NOT replace manifest.json, MOD_VERSION, mod/NewVanilla.zip, runtime or compatibility files with files from an older package.
+The existing GitHub Action will run because these paths changed and will rebuild manifest.json using the CURRENT MOD_VERSION and CURRENT mod/NewVanilla.zip already in the repository.
 
-v0.8.2 compatibility update:
-  - adds RA3 1.12 build SHA-256 ec230c6ae1eaee30b0b4fa6ba29d417c974ecae46d6715dfbe786a815935c165
-  - at 60 FPS launch it is normalized locally to the already supported 40023c... build, then converted to the exact FPS Patch v7 compatible 29aa6b... build
-  - the user's original Data\ra3_1.12.game is never permanently modified; the launcher restores it after the game exits
+v0.8.6 fixes:
+- A valid RA3 folder visible in the path field is synchronized to settings.json before Check for updates starts.
+- NewVanilla download uses the verified path shown in the UI instead of a stale saved GameRoot.
+- Older settings are repaired automatically when the visible path is valid.
+- UI now shows Downloading / Verifying / Installing stages for NewVanilla.
+
+Launcher SHA-256:
+9733c596e458a0e4ed0cf5484b6528ccff6806bdc642eb9b6319d631477d9281
+Installer SHA-256:
+41711ac8d9831db32bfca86b259cb585593be01a21668c1bfca51052fb9ca9be
