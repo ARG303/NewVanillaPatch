@@ -16,13 +16,13 @@
     "skuDef": "NewVanilla_1.02.skudef"
   },
   "launcher": {
-    "version": "0.8.11",
+    "version": "0.8.14",
     "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-    "sha256": "2fd32d72439482625867e8f9b3ade5e35b966e5818ed99ff9b8cce5840208a51"
+    "sha256": "bd139590fd74f4a438fd129060ba22a8eab00a46c21b75c3d664b81fd271d49e"
   },
   "installer": {
-    "version": "0.8.11",
+    "version": "0.8.14",
     "url": "https://github.com/ARG303/NewVanillaPatch/releases/latest/download/NewVanillaPatch_Setup.exe",
-    "sha256": "ba472c7aa482cb6b30959af63a0b6bd42a6ae6c997239bd9c97d89d6ef551d80"
+    "sha256": "6ba390d29af12688f9b0afcc7647b1fa3710340323ebc16c6bc7b0f8a8738bbe"
   }
 }
