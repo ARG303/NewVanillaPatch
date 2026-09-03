@@ -3,16 +3,10 @@
   "gameVersion": "1.12.3444.25830",
   "targetFps": 60,
   "files": [
-    {
-      "name": "xinput1_3.dll",
-      "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll",
-      "sha256": "781b9ec9cc24b6fd495747dd8434073e8abe60784aeb9fbfc4641b47af1560ff"
-    },
-    {
-      "name": "fps_patch.ini",
-      "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini",
-      "sha256": "6b02e5da7af03490a28a76ef11e754a4a65f0dc0ce651ce1bdca23cb4fa7a360"
-    }
+    {"name":"xinput1_3.dll","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll","sha256":"781b9ec9cc24b6fd495747dd8434073e8abe60784aeb9fbfc4641b47af1560ff"},
+    {"name":"fps_patch.ini","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini","sha256":"6b02e5da7af03490a28a76ef11e754a4a65f0dc0ce651ce1bdca23cb4fa7a360"},
+    {"name":"ra3_40023_to_29aa.r3dp","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/compatibility/ra3_40023_to_29aa.r3dp","sha256":"57ee4e460b24c077cf2d75fb6b6c628cc8ec3695f8ea0b6703f4928054ed0c2e"},
+    {"name":"ra3_ec230_to_40023.r3np","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/compatibility/ra3_ec230_to_40023.r3np","sha256":"6b9debd905629281c7f8d10e18667eeb431d5171c4594d712c658fb6cfcfa2e0"}
   ],
   "mod": {
     "version": "1.02",
@@ -22,8 +16,13 @@
     "skuDef": "NewVanilla_1.02.skudef"
   },
   "launcher": {
-    "version": "0.8.8",
+    "version": "0.8.9",
     "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-    "sha256": "0bd2f50060bf11d73dad582b6afe24c013f8090df98f9ed52532f3a8212e8ecd"
+    "sha256": "d0b284f1e8cc4753d8d383c8347ac1a0c79b9dba31821fba6596dff37bde4b52"
+  },
+  "installer": {
+    "version": "0.8.9",
+    "url": "https://github.com/ARG303/NewVanillaPatch/releases/latest/download/NewVanillaPatch_Setup.exe",
+    "sha256": "74231320833c38081bab94f7f94a0d8d5ce460964352a5daac2819340b7ce0ae"
   }
 }
