@@ -1,0 +1,15 @@
+Suggested repository layout for the Godot branch:
+
+godot_launcher/
+  project.godot
+  main.tscn
+  export_presets.cfg
+  VERSION
+  scripts/main.gd
+  README.md
+
+Keep the existing runtime files at:
+  runtime/xinput1_3.dll
+  runtime/fps_patch.ini
+
+Do not bundle runtime/xinput1_3.dll into the Godot project or exported PCK.

@@ -1,0 +1,24 @@
+; Engine configuration file.
+; NewVanilla Patch launcher - Godot branch
+config_version=5
+
+[application]
+config/name="NewVanilla Patch"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.7")
+
+[display]
+window/size/viewport_width=1040
+window/size/viewport_height=690
+window/size/window_width_override=1040
+window/size/window_height_override=690
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.035, 0.039, 0.047, 1)
+
+[gui]
+theme/custom_font_multichannel_signed_distance_field=true
