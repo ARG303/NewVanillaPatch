@@ -1,28 +1,7 @@
 {
-  "patchVersion": "7.0.1",
-  "gameVersion": "1.12.3444.25830",
-  "targetFps": 60,
-  "files": [
-    {"name":"xinput1_3.dll","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/xinput1_3.dll","sha256":"781b9ec9cc24b6fd495747dd8434073e8abe60784aeb9fbfc4641b47af1560ff"},
-    {"name":"fps_patch.ini","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/runtime/fps_patch.ini","sha256":"6b02e5da7af03490a28a76ef11e754a4a65f0dc0ce651ce1bdca23cb4fa7a360"},
-    {"name":"ra3_40023_to_29aa.r3dp","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/compatibility/ra3_40023_to_29aa.r3dp","sha256":"57ee4e460b24c077cf2d75fb6b6c628cc8ec3695f8ea0b6703f4928054ed0c2e"},
-    {"name":"ra3_ec230_to_40023.r3np","url":"https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/compatibility/ra3_ec230_to_40023.r3np","sha256":"6b9debd905629281c7f8d10e18667eeb431d5171c4594d712c658fb6cfcfa2e0"}
-  ],
-  "mod": {
-    "version": "1.02",
-    "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/mod/NewVanilla.zip",
-    "sha256": "a3f87a1090ea8893018e7881a646cf65514236566c36f1a5f0705b74b0426b4d",
-    "folder": "NewVanilla",
-    "skuDef": "NewVanilla_1.02.skudef"
-  },
   "launcher": {
-    "version": "0.8.14",
-    "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/launcher/RA3FPSLauncher.exe",
-    "sha256": "bd139590fd74f4a438fd129060ba22a8eab00a46c21b75c3d664b81fd271d49e"
-  },
-  "installer": {
-    "version": "0.8.14",
-    "url": "https://github.com/ARG303/NewVanillaPatch/releases/latest/download/NewVanillaPatch_Setup.exe",
-    "sha256": "6ba390d29af12688f9b0afcc7647b1fa3710340323ebc16c6bc7b0f8a8738bbe"
+    "version": "1.0.0-alpha43",
+    "url": "https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/FPS.exe",
+    "sha256": ""
   }
 }
