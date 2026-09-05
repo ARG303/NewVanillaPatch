@@ -1,0 +1,7 @@
+FPS v1.0.0-alpha43
+
+- Исправлен невидимый курсор RA3 при приватном запуске.
+- Приватный 30 FPS XInput сохранён.
+- 60 FPS adaptive runtime сохранён.
+- Нет WriteProcessMemory / CreateRemoteThread / import rewriting.
+- Сохранены English/Russian private SkuDef, CommunityPatch, GitHub update check и auto-detect RA3.
