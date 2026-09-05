@@ -1,9 +1,9 @@
 {
   "launcher": {
-    "version": "1.0.0-alpha43",
-    "url": "https://github.com/ARG303/NewVanillaPatch/releases/download/v1.0.0-alpha43/FPS_update_bridge.exe",
-    "sha256": "dd32243ac30b30296d5c5d2785daf2fd68c4990a0711192e9016c6ffc194f508"
+    "version": "1.0.0-alpha45",
+    "url": "https://github.com/ARG303/NewVanillaPatch/releases/download/v1.0.0-alpha45/FPS_update_bridge.exe",
+    "sha256": "0608e7904cd1b0cd2865dc271d1da6164cd9c0bb156879cfd58a6f3597cd9cbd"
   },
-  "patchVersion": "1.0.0-alpha43",
+  "patchVersion": "1.0.0-alpha45",
   "files": {}
 }
