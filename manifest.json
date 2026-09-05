@@ -1,8 +1,8 @@
 {
   "launcher": {
     "version": "1.0.0-alpha43",
-    "url": "https://github.com/ARG303/NewVanillaPatch/releases/download/v1.0.0-alpha43/FPS_x86.exe",
-    "sha256": "b191389aa609de1b7b7e112e59f17547e711eec99f53d58ee56215e2c1eccc28"
+    "url": "https://github.com/ARG303/NewVanillaPatch/releases/download/v1.0.0-alpha43/FPS_update_bridge.exe",
+    "sha256": "dd32243ac30b30296d5c5d2785daf2fd68c4990a0711192e9016c6ffc194f508"
   },
   "patchVersion": "1.0.0-alpha43",
   "files": {}
