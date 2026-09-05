@@ -1,7 +1,7 @@
 FPS v1.0.0-alpha43
 
-- Исправлен невидимый курсор RA3 при приватном запуске.
-- Приватный 30 FPS XInput сохранён.
-- 60 FPS adaptive runtime сохранён.
-- Нет WriteProcessMemory / CreateRemoteThread / import rewriting.
-- Сохранены English/Russian private SkuDef, CommunityPatch, GitHub update check и auto-detect RA3.
+- Fixed RA3 cursor path for private launch runtime.
+- 30 FPS uses the launcher-owned clean XInput runtime.
+- 60 FPS uses the adaptive FPS proxy runtime.
+- Original RA3 XInput/game installation remains untouched.
+- GitHub update support retained.

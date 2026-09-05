@@ -1,40 +1,56 @@
-FPS alpha43 — пакет для обновления через GitHub
-================================================
+FPS / NewVanillaPatch — публикация обновления alpha43 через GitHub Releases
 
-Репозиторий:
-ARG303/NewVanillaPatch
+Почему этот вариант лучше
+==========================
+GitHub через браузер ограничивает обычную загрузку файла в репозиторий 25 MiB.
+Godot FPS.exe может быть больше этого лимита. Поэтому EXE публикуется как asset
+в GitHub Release, а в корень ветки main загружается только маленький manifest.json.
 
-Лаунчер уже проверяет:
-https://raw.githubusercontent.com/ARG303/NewVanillaPatch/main/manifest.json
+ВАЖНО
+=====
+Репозиторий ARG303/NewVanillaPatch должен быть PUBLIC.
+Лаунчер alpha43 читает manifest без GitHub-токена по адресу raw.githubusercontent.com.
+Если репозиторий Private, в лаунчере будет GITHUB ERROR/RETRY.
 
-Самый простой способ публикации alpha43:
+Как публиковать
+===============
+1. Экспортируй рабочий RELEASE-билд Godot как FPS.exe.
+2. Положи FPS.exe рядом с prepare_release_update.bat
+   или перетащи FPS.exe мышкой на BAT.
+3. Запусти prepare_release_update.bat.
+4. После выполнения будут готовы:
 
-1. Открой проект alpha43 в Godot.
-2. Экспортируй RELEASE-версию Windows Desktop в FPS.exe.
-   В проекте preset уже настроен на build/FPS.exe.
-3. Возьми получившийся FPS.exe.
-4. Положи его рядом с prepare_github_update.bat
-   ИЛИ просто перетащи FPS.exe мышкой на prepare_github_update.bat.
-5. Скрипт создаст папку UPLOAD_TO_GITHUB с двумя готовыми файлами:
-      FPS.exe
-      manifest.json
-6. На GitHub открой репозиторий ARG303/NewVanillaPatch, ветку main.
-7. Загрузить в КОРЕНЬ репозитория оба файла:
-      FPS.exe
-      manifest.json
-8. Commit changes.
+   RELEASE_ASSET\FPS.exe
+   UPLOAD_MANIFEST_TO_REPO\manifest.json
 
-После этого:
-- alpha42 и более старые версии увидят UPDATE • v1.0.0-alpha43;
-- alpha43 покажет GITHUB • SYNCED;
-- скачанный EXE будет проверяться по SHA-256, который автоматически записал BAT.
+5. На GitHub открой ARG303/NewVanillaPatch -> Releases -> Draft a new release.
+6. Создай НОВЫЙ tag:
 
-ВАЖНО:
-Не используй manifest.json из папки UPLOAD_TO_GITHUB до запуска BAT вместе с
-экспортированным FPS.exe, если хочешь проверку SHA-256. В исходном шаблоне SHA
-пустой специально, потому что хэш зависит от конкретно собранного FPS.exe.
+   v1.0.0-alpha43
 
-Если FPS.exe уже лежит в build\FPS.exe внутри проекта, можешь вызвать:
-prepare_github_update.bat "полный_путь_к_build\FPS.exe"
+7. Прикрепи к Release файл:
 
-Файлы исходников лаунчера лежат в папке SOURCE и не обязательны для автообновления.
+   RELEASE_ASSET\FPS.exe
+
+   Имя asset должно остаться ТОЧНО "FPS.exe".
+
+8. Нажми Publish release.
+9. После публикации Release загрузи только файл:
+
+   UPLOAD_MANIFEST_TO_REPO\manifest.json
+
+   в КОРЕНЬ ветки main репозитория.
+
+10. Проверь в браузере, что открывается manifest.json через кнопку Raw.
+11. Запусти launcher. У alpha43 должно быть GITHUB • SYNCED.
+    Более старая версия должна увидеть UPDATE • v1.0.0-alpha43.
+
+Если launcher показывает GITHUB ERROR
+=====================================
+Проверь три вещи:
+- repository Visibility = Public;
+- ветка называется именно main;
+- manifest.json лежит в самом корне main, а не в подпапке.
+
+Если в GitHub Release файл переименован, ссылка из manifest перестанет работать.
+Оставляй имя FPS.exe.
